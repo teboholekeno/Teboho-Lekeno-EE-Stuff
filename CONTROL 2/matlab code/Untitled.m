@@ -21,9 +21,9 @@ steadyS_error = 0.01;
 K = (B*l)/(B^2*l^2+b*R);
 Tau = (m*R)/(B^2*l^2+b*R);
 
-z = sqrt(log(overshoot)^2/((log(overshoot))^2+(pi)^2))
+z = sqrt(log(overshoot)^2/(log(overshoot)^2+(pi)^2))
 w_n = (1-0.4167*z+2.917*z^2)/(rise_time)
 
 K_i = 5.5
-K_d = 0
-K_p = 1.9
+K_d = 20
+K_p = 1
