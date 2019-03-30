@@ -24,10 +24,6 @@ Tau = (m*R)/(B^2*l^2+b*R);
 z = sqrt(log(overshoot)^2/(log(overshoot)^2+(pi)^2));
 w_n = (1-0.4167*z+2.917*z^2)/(rise_time);
 
-K_i = 5;
-K_d = 1;
-K_p = 5;
-
-zeta = 0.7
-wn = 1.8
-sgrid(zeta,wn)
+K_i = 1;
+K_d = K_i/w_n^2 - Tau/K
+K_p = 2*z*w_n*(Tau+K_d*K)/ - 1/K
