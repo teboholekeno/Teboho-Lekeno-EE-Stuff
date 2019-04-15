@@ -5,22 +5,22 @@
 ## Debug
 ProjectName            :=teboho
 ConfigurationName      :=Debug
-WorkspacePath          :=C:/Users/teboho/Documents/richard
-ProjectPath            :=C:/Users/teboho/Documents/richard/loanShark
+WorkspacePath          :=C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard
+ProjectPath            :=C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard/loanShark
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=teboho
-Date                   :=28/01/2019
+User                   :=lekenot
+Date                   :=15/04/2019
 CodeLitePath           :="C:/Program Files/CodeLite"
-LinkerName             :=C:/mingw64/bin/g++.exe
-SharedObjectLinkerName :=C:/mingw64/bin/g++.exe -shared -fPIC
+LinkerName             :=clang++
+SharedObjectLinkerName :=clang++ -shared -fPIC
 ObjectSuffix           :=.o
-DependSuffix           :=.o.d
-PreprocessSuffix       :=.i
-DebugSwitch            :=-g 
+DependSuffix           :=
+PreprocessSuffix       :=.o.i
+DebugSwitch            :=-gstab
 IncludeSwitch          :=-I
 LibrarySwitch          :=-l
 OutputSwitch           :=-o 
@@ -31,12 +31,12 @@ OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
 Preprocessors          :=$(PreprocessorSwitch)SFML_STATIC 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
-PreprocessOnlySwitch   :=-E
+PreprocessOnlySwitch   :=-E 
 ObjectsFileList        :="teboho.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
 RcCmpOptions           := 
-RcCompilerName         :=C:/mingw64/bin/windres.exe
+RcCompilerName         :=windres
 LinkOptions            :=  
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)C:\doctest-1.2.9\doctest $(IncludeSwitch)C:\SFML-2.5.0\include 
 IncludePCH             := 
@@ -49,19 +49,20 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)C:\SFML-2.5.
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := C:/mingw64/bin/ar.exe rcu
-CXX      := C:/mingw64/bin/g++.exe --std=c++17
-CC       := C:/mingw64/bin/gcc.exe
+AR       := ar rcus
+CXX      := clang++
+CC       := clang
 CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
-AS       := C:/mingw64/bin/as.exe
+AS       := llvm-as
 
 
 ##
 ## User defined environment variables
 ##
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/graphs.cpp$(ObjectSuffix) $(IntermediateDirectory)/Window_Size.cpp$(ObjectSuffix) $(IntermediateDirectory)/security.cpp$(ObjectSuffix) $(IntermediateDirectory)/accountant.cpp$(ObjectSuffix) $(IntermediateDirectory)/processor.cpp$(ObjectSuffix) $(IntermediateDirectory)/exception.cpp$(ObjectSuffix) $(IntermediateDirectory)/date.cpp$(ObjectSuffix) $(IntermediateDirectory)/addCreditor.cpp$(ObjectSuffix) 
+CodeLiteDir:=C:\Program Files\CodeLite
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/graphs.cpp$(ObjectSuffix) $(IntermediateDirectory)/security.cpp$(ObjectSuffix) $(IntermediateDirectory)/Window_Size.cpp$(ObjectSuffix) $(IntermediateDirectory)/addCreditor.cpp$(ObjectSuffix) $(IntermediateDirectory)/exception.cpp$(ObjectSuffix) $(IntermediateDirectory)/date.cpp$(ObjectSuffix) $(IntermediateDirectory)/accountant.cpp$(ObjectSuffix) $(IntermediateDirectory)/processor.cpp$(ObjectSuffix) 
 
 
 
@@ -92,80 +93,51 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Documents/richard/loanShark/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM main.cpp
-
+$(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp 
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard/loanShark/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
 
-$(IntermediateDirectory)/graphs.cpp$(ObjectSuffix): graphs.cpp $(IntermediateDirectory)/graphs.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Documents/richard/loanShark/graphs.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/graphs.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/graphs.cpp$(DependSuffix): graphs.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/graphs.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/graphs.cpp$(DependSuffix) -MM graphs.cpp
-
+$(IntermediateDirectory)/graphs.cpp$(ObjectSuffix): graphs.cpp 
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard/loanShark/graphs.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/graphs.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/graphs.cpp$(PreprocessSuffix): graphs.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/graphs.cpp$(PreprocessSuffix) graphs.cpp
 
-$(IntermediateDirectory)/Window_Size.cpp$(ObjectSuffix): Window_Size.cpp $(IntermediateDirectory)/Window_Size.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Documents/richard/loanShark/Window_Size.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Window_Size.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Window_Size.cpp$(DependSuffix): Window_Size.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Window_Size.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Window_Size.cpp$(DependSuffix) -MM Window_Size.cpp
-
-$(IntermediateDirectory)/Window_Size.cpp$(PreprocessSuffix): Window_Size.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Window_Size.cpp$(PreprocessSuffix) Window_Size.cpp
-
-$(IntermediateDirectory)/security.cpp$(ObjectSuffix): security.cpp $(IntermediateDirectory)/security.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Documents/richard/loanShark/security.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/security.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/security.cpp$(DependSuffix): security.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/security.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/security.cpp$(DependSuffix) -MM security.cpp
-
+$(IntermediateDirectory)/security.cpp$(ObjectSuffix): security.cpp 
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard/loanShark/security.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/security.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/security.cpp$(PreprocessSuffix): security.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/security.cpp$(PreprocessSuffix) security.cpp
 
-$(IntermediateDirectory)/accountant.cpp$(ObjectSuffix): accountant.cpp $(IntermediateDirectory)/accountant.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Documents/richard/loanShark/accountant.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/accountant.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/accountant.cpp$(DependSuffix): accountant.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/accountant.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/accountant.cpp$(DependSuffix) -MM accountant.cpp
+$(IntermediateDirectory)/Window_Size.cpp$(ObjectSuffix): Window_Size.cpp 
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard/loanShark/Window_Size.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Window_Size.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Window_Size.cpp$(PreprocessSuffix): Window_Size.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Window_Size.cpp$(PreprocessSuffix) Window_Size.cpp
 
-$(IntermediateDirectory)/accountant.cpp$(PreprocessSuffix): accountant.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/accountant.cpp$(PreprocessSuffix) accountant.cpp
-
-$(IntermediateDirectory)/processor.cpp$(ObjectSuffix): processor.cpp $(IntermediateDirectory)/processor.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Documents/richard/loanShark/processor.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/processor.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/processor.cpp$(DependSuffix): processor.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/processor.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/processor.cpp$(DependSuffix) -MM processor.cpp
-
-$(IntermediateDirectory)/processor.cpp$(PreprocessSuffix): processor.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/processor.cpp$(PreprocessSuffix) processor.cpp
-
-$(IntermediateDirectory)/exception.cpp$(ObjectSuffix): exception.cpp $(IntermediateDirectory)/exception.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Documents/richard/loanShark/exception.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/exception.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/exception.cpp$(DependSuffix): exception.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/exception.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/exception.cpp$(DependSuffix) -MM exception.cpp
-
-$(IntermediateDirectory)/exception.cpp$(PreprocessSuffix): exception.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/exception.cpp$(PreprocessSuffix) exception.cpp
-
-$(IntermediateDirectory)/date.cpp$(ObjectSuffix): date.cpp $(IntermediateDirectory)/date.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Documents/richard/loanShark/date.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/date.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/date.cpp$(DependSuffix): date.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/date.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/date.cpp$(DependSuffix) -MM date.cpp
-
-$(IntermediateDirectory)/date.cpp$(PreprocessSuffix): date.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/date.cpp$(PreprocessSuffix) date.cpp
-
-$(IntermediateDirectory)/addCreditor.cpp$(ObjectSuffix): addCreditor.cpp $(IntermediateDirectory)/addCreditor.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Documents/richard/loanShark/addCreditor.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/addCreditor.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/addCreditor.cpp$(DependSuffix): addCreditor.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/addCreditor.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/addCreditor.cpp$(DependSuffix) -MM addCreditor.cpp
-
+$(IntermediateDirectory)/addCreditor.cpp$(ObjectSuffix): addCreditor.cpp 
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard/loanShark/addCreditor.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/addCreditor.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/addCreditor.cpp$(PreprocessSuffix): addCreditor.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/addCreditor.cpp$(PreprocessSuffix) addCreditor.cpp
 
+$(IntermediateDirectory)/exception.cpp$(ObjectSuffix): exception.cpp 
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard/loanShark/exception.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/exception.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/exception.cpp$(PreprocessSuffix): exception.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/exception.cpp$(PreprocessSuffix) exception.cpp
 
--include $(IntermediateDirectory)/*$(DependSuffix)
+$(IntermediateDirectory)/date.cpp$(ObjectSuffix): date.cpp 
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard/loanShark/date.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/date.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/date.cpp$(PreprocessSuffix): date.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/date.cpp$(PreprocessSuffix) date.cpp
+
+$(IntermediateDirectory)/accountant.cpp$(ObjectSuffix): accountant.cpp 
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard/loanShark/accountant.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/accountant.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/accountant.cpp$(PreprocessSuffix): accountant.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/accountant.cpp$(PreprocessSuffix) accountant.cpp
+
+$(IntermediateDirectory)/processor.cpp$(ObjectSuffix): processor.cpp 
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/lekenot/Desktop/Teboho-Lekeno-EE-Stuff/richard/loanShark/processor.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/processor.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/processor.cpp$(PreprocessSuffix): processor.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/processor.cpp$(PreprocessSuffix) processor.cpp
+
 ##
 ## Clean
 ##

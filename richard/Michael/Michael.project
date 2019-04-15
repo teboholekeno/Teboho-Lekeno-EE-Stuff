@@ -93,6 +93,8 @@
     </Configuration>
   </Settings>
   <VirtualDirectory Name="src">
+    <File Name="Algorithm1.cpp"/>
+    <File Name="Algorithm1.h"/>
     <File Name="Game_Control.cpp"/>
     <File Name="Game_Control.h"/>
     <File Name="Current_Playing_Board.cpp"/>
