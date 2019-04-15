@@ -1,1 +1,1 @@
-./Debug/graphics.cpp.o ./Debug/main.cpp.o ./Debug/PlantControl.cpp.o ./Debug/truck.cpp.o   
+./Debug/main.cpp.o ./Debug/graphics.cpp.o ./Debug/PlantControl.cpp.o ./Debug/truck.cpp.o   

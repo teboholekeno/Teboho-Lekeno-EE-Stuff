@@ -2,6 +2,7 @@
 #define GAME_CONTROL_H
 #include "Game_Board_Management.h"
 #include "Current_Playing_Board.h"
+#include "Algorithm1.h"
 
 class Game_Control
 {
@@ -12,6 +13,7 @@ public:
 private:
     Game_Board_Management gameBoardManagement;
     Current_Playing_Board currentPlayingBoard;
+    Algorithm1 algorithm1;
 };
 
 #endif // GAME_CONTROL_H
