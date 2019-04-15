@@ -1,0 +1,1 @@
+./Debug/security.cpp.o ./Debug/design.cpp.o ./Debug/keyBoardInput.cpp.o ./Debug/clientObject.cpp.o ./Debug/storageAcess.cpp.o ./Debug/Administrator.cpp.o ./Debug/Date.cpp.o ./Debug/Accountant.cpp.o ./Debug/Exceptions.cpp.o ./Debug/main.cpp.o   
