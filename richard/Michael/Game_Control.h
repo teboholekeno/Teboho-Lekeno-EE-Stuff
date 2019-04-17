@@ -4,6 +4,8 @@
 #include "Current_Playing_Board.h"
 #include "Algorithm1.h"
 
+using namespace std;
+
 class Game_Control
 {
 public:

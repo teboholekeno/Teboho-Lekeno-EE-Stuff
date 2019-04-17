@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <memory>
 #include "Current_Playing_Board.h"
 
 using namespace std;
@@ -15,8 +16,7 @@ public:
 	Algorithm1();
 	Algorithm1(int);
     char Get_Marker() const {return marker;}
-	void display() const;
-    tuple <int, int> Optimal_Move(Current_Playing_Board&) const;
+    WinningMove Optimal_Move(Current_Playing_Board);
     
 	~Algorithm1();
 private:
@@ -27,9 +27,9 @@ private:
 	int** playing_grid_clone;
     void Create_Dynamic_Grid ();
     void Format_Dynamic_Memory ();
-    void determineWinningMoves(Current_Playing_Board&);
+    void determineWinningMoves(Current_Playing_Board);
     int Get_Weight (int x, int y) const {return playing_grid_clone[x][y];}
-    void Down_Winning (Current_Playing_Board&, int, int);
+    void Down_Winning (Current_Playing_Board, int, int);
 };
 
 

@@ -68,18 +68,7 @@ void Algorithm1::Format_Dynamic_Memory ()
     }
 }
 
-void Algorithm1::display() const
-{
-	for (auto rows = 0; rows < size; rows++)
-    {
-        for (auto columns = 0; columns < size; columns++)
-        {
-			cout << playing_grid_clone[rows][columns] << "\t";
-        } cout << endl;
-    }
-}
-
-void Algorithm1::determineWinningMoves(Current_Playing_Board& E)
+void Algorithm1::determineWinningMoves(Current_Playing_Board E)
 {
     for (int rows = 0; rows < size; rows++)
     {
@@ -87,35 +76,41 @@ void Algorithm1::determineWinningMoves(Current_Playing_Board& E)
         {
             if (E.Is_Cell_Empty(rows, columns))            //prevents replacing the cell already played.
             {
-                Down_Winning (E, rows, columns); cout << "Winning found" << endl;
+                Down_Winning (E, rows, columns); 
             }
         }
     }
 }
 
-void Algorithm1::Down_Winning (Current_Playing_Board& E, int rows, int columns)
+void Algorithm1::Down_Winning (Current_Playing_Board E, int rows, int columns)
 {
-    int counterDown = 0;
+    int counterDown = 0; 
     bool encloseFound = false;
                 
     for (int _rows = rows+1; _rows < size; _rows++) //downwards (checking if there are available coins in a column)
     {
         if (E.Get_Marker(_rows, columns) == marker || E.Get_Marker(_rows, columns) == '_' )
-            _rows = size;                            // breaking the loop if the next coin from checked cell is of the same kind. 
-        else if (counterDown >= 1 && E.Get_Marker(_rows, columns) == marker)
-            encloseFound = true;                     // mark true if the encloser for the coin to be placed was found.
-        else
+        {
+            if (counterDown >= 1 && E.Get_Marker(_rows, columns) == marker)
+            {
+                encloseFound = true;                     // mark true if the encloser for the coin to be placed was found.
+                break;
+            }
+            else
+                break;                            // breaking the loop if the next coin from checked cell is of the same kind.
+        }
+        else if (E.Get_Marker(_rows, columns) != marker && E.Get_Marker(_rows, columns) != '_' )
             counterDown++;                           // helps determine existing coins to be turned
     }
-                
+             
     if (counterDown >= 1 && encloseFound == true) // there exist coins to be turned
-    {
+    { 
         auto obtainedMove = WinningMove {rows, columns, Get_Weight (rows, columns)};
-        List_Of_Winning_Moves.push_back(obtainedMove);
+        List_Of_Winning_Moves.push_back(obtainedMove); 
     }
 }
 
-tuple <int, int> Algorithm1::Optimal_Move(Current_Playing_Board& E) const
+WinningMove Algorithm1::Optimal_Move(Current_Playing_Board E)
 {
     determineWinningMoves(E);
     
@@ -127,7 +122,7 @@ tuple <int, int> Algorithm1::Optimal_Move(Current_Playing_Board& E) const
             best_move = List_Of_Winning_Moves[counter];
     }
     
-    return make_tuple(best_move.x, best_move.y);
+    return best_move;
 }
 
 

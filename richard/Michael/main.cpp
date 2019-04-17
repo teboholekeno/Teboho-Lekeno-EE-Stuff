@@ -1,15 +1,13 @@
 #include <iostream>
-#include "Current_Playing_Board.h"
-#include "Algorithm1.h"
+#include "Game_Control.h"
 
 using namespace std;
 
 int main()
 {
-	auto algorithm1 = Algorithm1(16);
+	Game_Control gameControl;
 	
-	algorithm1.display();
+	gameControl.run();
     
-    //cout << game.Get_Board_Size() << endl;
     return 0;
 }

@@ -43,7 +43,7 @@ bool Current_Playing_Board::Is_Cell_Empty(int row, int column) const
 
 void Current_Playing_Board::Place_Move (int row, int column, char marker)
 {
-    game_grid [row][column] == marker;
+    game_grid [row][column] = marker;
 }
 
 void Current_Playing_Board::display() const
