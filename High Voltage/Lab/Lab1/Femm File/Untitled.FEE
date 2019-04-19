@@ -33,7 +33,7 @@
 [ConductorProps]  = 2
   <BeginConductor>
     <ConductorName> = "COPPER"
-    <Vc> = 28290
+    <Vc> = 32500
     <qc> = 0
     <ConductorType> = 1
   <EndConductor>
@@ -54,12 +54,13 @@
 14	100	0	0	1
 400	8200	0	0	0
 600	-8800	0	0	0
-[NumSegments] = 5
+[NumSegments] = 6
 5	7	-1	0	0	0	1
 7	6	-1	0	0	0	1
 6	4	-1	0	0	0	1
 0	2	-1	0	0	0	2
 2	1	-1	0	0	0	2
+3	2	-1	0	0	0	0
 [NumArcSegments] = 4
 4	3	90	1	0	0	0	1	1
 3	5	90	1	0	0	0	1	1
