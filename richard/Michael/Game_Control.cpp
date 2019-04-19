@@ -23,12 +23,19 @@ void Game_Control::run()
         {
             if (cellsFilled % 2 == 0) //algorithms 1 place the move.
             {
-                currentPlayingBoard.Place_Move(algorithm1.Optimal_Move(currentPlayingBoard).x, algorithm1.Optimal_Move(currentPlayingBoard).y, algorithm1.Get_Marker());
+                WinningMove bestMove = WinningMove{algorithm1.Optimal_Move(currentPlayingBoard).x, algorithm1.Optimal_Move(currentPlayingBoard).y};
+                currentPlayingBoard.Place_Move(bestMove.x, bestMove.y, algorithm1.Get_Marker());
+                turnFlankedPieces.Turn_Pieces(currentPlayingBoard, bestMove.x, bestMove.y, algorithm1.Get_Marker());
                 cellsFilled++; 
                 currentPlayingBoard.display();
             }
             else  //algorithm 2 place the move.
             {
+                Move move_ = Move{algorithm2.Optimal_Move(currentPlayingBoard).x, algorithm2.Optimal_Move(currentPlayingBoard).y};
+                currentPlayingBoard.Place_Move(move_.x, move_.y, algorithm2.Get_Marker());
+                currentPlayingBoard.display(); cout << endl;
+                turnFlankedPieces.Turn_Pieces(currentPlayingBoard, move_.x, move_.y, algorithm2.Get_Marker());
+                cellsFilled++; 
                 
             }
         }

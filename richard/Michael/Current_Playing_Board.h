@@ -13,6 +13,7 @@ public:
     void Place_Move (int, int, char);
     char Get_Marker(int x, int y) const {return game_grid[x][y];}
     void display() const;
+    int Get_Board_Size() const {return size;}
     ~Current_Playing_Board();
 private:
     char** game_grid;

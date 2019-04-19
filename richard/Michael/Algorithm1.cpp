@@ -77,6 +77,9 @@ void Algorithm1::determineWinningMoves(Current_Playing_Board E)
             if (E.Is_Cell_Empty(rows, columns))            //prevents replacing the cell already played.
             {
                 Down_Winning (E, rows, columns); 
+                Up_Winning (E, rows, columns); 
+                Right_Winning (E, rows, columns); 
+                Left_Winning (E, rows, columns); 
             }
         }
     }
@@ -94,6 +97,7 @@ void Algorithm1::Down_Winning (Current_Playing_Board E, int rows, int columns)
             if (counterDown >= 1 && E.Get_Marker(_rows, columns) == marker)
             {
                 encloseFound = true;                     // mark true if the encloser for the coin to be placed was found.
+                cout << "Winning found Down" << endl;
                 break;
             }
             else
@@ -107,6 +111,108 @@ void Algorithm1::Down_Winning (Current_Playing_Board E, int rows, int columns)
     { 
         auto obtainedMove = WinningMove {rows, columns, Get_Weight (rows, columns)};
         List_Of_Winning_Moves.push_back(obtainedMove); 
+        cout<< "Winning Down: " << rows << " " << columns << endl;
+    }
+}
+
+void Algorithm1::Up_Winning (Current_Playing_Board E, int rows, int columns)
+{
+    int counterDown = 0; 
+    bool encloseFound = false;
+                
+    for (int _rows = rows-1; _rows >= 0; _rows--) //upwards (checking if there are available coins in a column)
+    {
+        if (E.Get_Marker(_rows, columns) == marker || E.Get_Marker(_rows, columns) == '_' )
+        {
+            if (counterDown >= 1 && E.Get_Marker(_rows, columns) == marker)
+            {
+                encloseFound = true;                     // mark true if the encloser for the coin to be placed was found.
+                cout << "Winning found Up" << endl;
+                break;
+            }
+            else
+                break;                            // breaking the loop if the next coin from checked cell is of the same kind.
+        }
+        else if (E.Get_Marker(_rows, columns) != marker && E.Get_Marker(_rows, columns) != '_' )
+            counterDown++;                           // helps determine existing coins to be turned
+    }
+             
+    if (counterDown >= 1 && encloseFound == true) // there exist coins to be turned
+    { 
+        auto obtainedMove = WinningMove {rows, columns, Get_Weight (rows, columns)};
+        List_Of_Winning_Moves.push_back(obtainedMove); 
+        
+        cout<< "Winning Up: " << rows << " " << columns << endl;
+    }
+}
+
+void Algorithm1::Left_Winning (Current_Playing_Board E, int rows, int columns)
+{
+    int counterDown = 0; 
+    bool encloseFound = false;
+                
+    for (int _columns = columns-1; _columns >= 0; _columns--) //upwards (checking if there are available coins in a column)
+    {
+        if (E.Get_Marker(rows, _columns) == marker || E.Get_Marker(rows, _columns) == '_' )
+        {
+            if (counterDown >= 1 && E.Get_Marker(rows, _columns) == marker)
+            {
+                encloseFound = true;                     // mark true if the encloser for the coin to be placed was found.
+                cout << "Winning found Left" << endl;
+                break;
+            }
+            else
+                break;                            // breaking the loop if the next coin from checked cell is of the same kind.
+        }
+        else if (E.Get_Marker(rows, _columns) != marker && E.Get_Marker(rows, _columns) != '_' )
+            counterDown++;                           // helps determine existing coins to be turned
+    }
+             
+    if (counterDown >= 1 && encloseFound == true) // there exist coins to be turned
+    { 
+        auto obtainedMove = WinningMove {rows, columns, Get_Weight (rows, columns)};
+        List_Of_Winning_Moves.push_back(obtainedMove); 
+        
+        cout<< "Winning Left: " << rows << " " << columns << endl;
+    }
+}
+
+void Algorithm1::Right_Winning (Current_Playing_Board E, int rows, int columns)
+{
+    int counterDown = 0; 
+    bool encloseFound = false;
+                
+    for (int _columns = columns+1; _columns < size; _columns++) //right (checking if there are available coins in a column)
+    {
+        if (E.Get_Marker(rows, _columns) == marker || E.Get_Marker(rows, _columns) == '_' )
+        {
+            if (counterDown >= 1 && E.Get_Marker(rows, _columns) == marker)
+            {
+                encloseFound = true;                     // mark true if the encloser for the coin to be placed was found.
+                cout << "Winning found Right" << endl;
+                break;
+            }
+            else
+                break;                            // breaking the loop if the next coin from checked cell is of the same kind.
+        }
+        else if (E.Get_Marker(rows, _columns) != marker && E.Get_Marker(rows, _columns) != '_' )
+            counterDown++;                           // helps determine existing coins to be turned
+    }
+             
+    if (counterDown >= 1 && encloseFound == true) // there exist coins to be turned
+    { 
+        auto obtainedMove = WinningMove {rows, columns, Get_Weight (rows, columns)};
+        List_Of_Winning_Moves.push_back(obtainedMove); 
+        cout<< "Winning Right: " << rows << " " << columns << endl;
+    }
+}
+
+void Algorithm1::Format_List_Of_Winning_Moves()
+{
+    for (int counter = List_Of_Winning_Moves.size() - 1; counter >= 0; counter--)
+    {
+             if( List_Of_Winning_Moves.size()  != 0)
+                List_Of_Winning_Moves.erase(List_Of_Winning_Moves.begin() + counter);
     }
 }
 
@@ -122,7 +228,12 @@ WinningMove Algorithm1::Optimal_Move(Current_Playing_Board E)
             best_move = List_Of_Winning_Moves[counter];
     }
     
+    cout << "Best Move Selected: " << best_move.x << " " << best_move.y << endl;
+    Format_List_Of_Winning_Moves();
+    
     return best_move;
 }
+
+
 
 

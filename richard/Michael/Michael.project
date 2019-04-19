@@ -93,6 +93,10 @@
     </Configuration>
   </Settings>
   <VirtualDirectory Name="src">
+    <File Name="Algorithm2.cpp"/>
+    <File Name="Algorithm2.h"/>
+    <File Name="Turn_Flanked_Pieces.cpp"/>
+    <File Name="Turn_Flanked_Pieces.h"/>
     <File Name="Algorithm1.cpp"/>
     <File Name="Algorithm1.h"/>
     <File Name="Game_Control.cpp"/>
