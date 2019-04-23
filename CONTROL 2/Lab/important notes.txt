@@ -1,0 +1,2 @@
+*MODEL TRAINING         - all of the traning is done in open loop (also called series-parallel architecture), including validation and testing.
+						- it is transformed to closed loop for multistep-ahead prediction.

@@ -28,11 +28,16 @@ private:
     void Format_Dynamic_Memory ();
     void Format_List_Of_Winning_Moves();
     int Get_Weight (int x, int y) const {return playing_grid_clone[x][y];}
+    
     void determineWinningMoves(Current_Playing_Board);
     void Down_Winning (Current_Playing_Board, int, int);
     void Up_Winning (Current_Playing_Board, int, int);
     void Left_Winning (Current_Playing_Board, int, int);
     void Right_Winning (Current_Playing_Board, int, int);
+    void Diagonal_N_Down_Winning (Current_Playing_Board, int, int);
+    void Diagonal_N_Up_Winning (Current_Playing_Board, int, int);
+    void Diagonal_P_Down_Winning (Current_Playing_Board, int, int);
+    void Diagonal_P_Up_Winning (Current_Playing_Board, int, int);
     
 };
 

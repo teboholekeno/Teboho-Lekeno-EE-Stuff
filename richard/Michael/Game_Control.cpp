@@ -1,4 +1,5 @@
 #include "Game_Control.h"
+#include <cmath>
 
 Game_Control::Game_Control()
 {
@@ -31,13 +32,16 @@ void Game_Control::run()
             }
             else  //algorithm 2 place the move.
             {
-                Move move_ = Move{algorithm2.Optimal_Move(currentPlayingBoard).x, algorithm2.Optimal_Move(currentPlayingBoard).y};
+                Move move_ = algorithm2.Optimal_Move(currentPlayingBoard);
                 currentPlayingBoard.Place_Move(move_.x, move_.y, algorithm2.Get_Marker());
-                currentPlayingBoard.display(); cout << endl;
                 turnFlankedPieces.Turn_Pieces(currentPlayingBoard, move_.x, move_.y, algorithm2.Get_Marker());
+                currentPlayingBoard.display(); cout << endl;
                 cellsFilled++; 
                 
             }
+            
+            if (currentPlayingBoard.Is_Board_Full())
+                GameOn = false;
         }
     }
 }

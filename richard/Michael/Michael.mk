@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=teboho
-Date                   :=19/04/2019
+Date                   :=23/04/2019
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/mingw64/bin/g++.exe
 SharedObjectLinkerName :=C:/mingw64/bin/g++.exe -shared -fPIC
@@ -61,7 +61,7 @@ AS       := C:/mingw64/bin/as.exe
 ##
 ## User defined environment variables
 ##
-Objects0=$(IntermediateDirectory)/Algorithm2.cpp$(ObjectSuffix) $(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Game_Board_Management.cpp$(ObjectSuffix) $(IntermediateDirectory)/Game_Control.cpp$(ObjectSuffix) $(IntermediateDirectory)/Algorithm1.cpp$(ObjectSuffix) $(IntermediateDirectory)/Current_Playing_Board.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Game_Board_Management.cpp$(ObjectSuffix) $(IntermediateDirectory)/Game_Control.cpp$(ObjectSuffix) $(IntermediateDirectory)/Algorithm2.cpp$(ObjectSuffix) $(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(ObjectSuffix) $(IntermediateDirectory)/Current_Playing_Board.cpp$(ObjectSuffix) $(IntermediateDirectory)/Algorithm1.cpp$(ObjectSuffix) 
 
 
 
@@ -92,22 +92,6 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/Algorithm2.cpp$(ObjectSuffix): Algorithm2.cpp $(IntermediateDirectory)/Algorithm2.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Desktop/Teboho-Lekeno-EE-Stuff/richard/Michael/Algorithm2.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Algorithm2.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Algorithm2.cpp$(DependSuffix): Algorithm2.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Algorithm2.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Algorithm2.cpp$(DependSuffix) -MM Algorithm2.cpp
-
-$(IntermediateDirectory)/Algorithm2.cpp$(PreprocessSuffix): Algorithm2.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Algorithm2.cpp$(PreprocessSuffix) Algorithm2.cpp
-
-$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(ObjectSuffix): Turn_Flanked_Pieces.cpp $(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Desktop/Teboho-Lekeno-EE-Stuff/richard/Michael/Turn_Flanked_Pieces.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(DependSuffix): Turn_Flanked_Pieces.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(DependSuffix) -MM Turn_Flanked_Pieces.cpp
-
-$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(PreprocessSuffix): Turn_Flanked_Pieces.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(PreprocessSuffix) Turn_Flanked_Pieces.cpp
-
 $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Desktop/Teboho-Lekeno-EE-Stuff/richard/Michael/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
@@ -132,13 +116,21 @@ $(IntermediateDirectory)/Game_Control.cpp$(DependSuffix): Game_Control.cpp
 $(IntermediateDirectory)/Game_Control.cpp$(PreprocessSuffix): Game_Control.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Game_Control.cpp$(PreprocessSuffix) Game_Control.cpp
 
-$(IntermediateDirectory)/Algorithm1.cpp$(ObjectSuffix): Algorithm1.cpp $(IntermediateDirectory)/Algorithm1.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Desktop/Teboho-Lekeno-EE-Stuff/richard/Michael/Algorithm1.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Algorithm1.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Algorithm1.cpp$(DependSuffix): Algorithm1.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Algorithm1.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Algorithm1.cpp$(DependSuffix) -MM Algorithm1.cpp
+$(IntermediateDirectory)/Algorithm2.cpp$(ObjectSuffix): Algorithm2.cpp $(IntermediateDirectory)/Algorithm2.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Desktop/Teboho-Lekeno-EE-Stuff/richard/Michael/Algorithm2.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Algorithm2.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Algorithm2.cpp$(DependSuffix): Algorithm2.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Algorithm2.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Algorithm2.cpp$(DependSuffix) -MM Algorithm2.cpp
 
-$(IntermediateDirectory)/Algorithm1.cpp$(PreprocessSuffix): Algorithm1.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Algorithm1.cpp$(PreprocessSuffix) Algorithm1.cpp
+$(IntermediateDirectory)/Algorithm2.cpp$(PreprocessSuffix): Algorithm2.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Algorithm2.cpp$(PreprocessSuffix) Algorithm2.cpp
+
+$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(ObjectSuffix): Turn_Flanked_Pieces.cpp $(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Desktop/Teboho-Lekeno-EE-Stuff/richard/Michael/Turn_Flanked_Pieces.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(DependSuffix): Turn_Flanked_Pieces.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(DependSuffix) -MM Turn_Flanked_Pieces.cpp
+
+$(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(PreprocessSuffix): Turn_Flanked_Pieces.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(PreprocessSuffix) Turn_Flanked_Pieces.cpp
 
 $(IntermediateDirectory)/Current_Playing_Board.cpp$(ObjectSuffix): Current_Playing_Board.cpp $(IntermediateDirectory)/Current_Playing_Board.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Desktop/Teboho-Lekeno-EE-Stuff/richard/Michael/Current_Playing_Board.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Current_Playing_Board.cpp$(ObjectSuffix) $(IncludePath)
@@ -147,6 +139,14 @@ $(IntermediateDirectory)/Current_Playing_Board.cpp$(DependSuffix): Current_Playi
 
 $(IntermediateDirectory)/Current_Playing_Board.cpp$(PreprocessSuffix): Current_Playing_Board.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Current_Playing_Board.cpp$(PreprocessSuffix) Current_Playing_Board.cpp
+
+$(IntermediateDirectory)/Algorithm1.cpp$(ObjectSuffix): Algorithm1.cpp $(IntermediateDirectory)/Algorithm1.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Desktop/Teboho-Lekeno-EE-Stuff/richard/Michael/Algorithm1.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Algorithm1.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Algorithm1.cpp$(DependSuffix): Algorithm1.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Algorithm1.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Algorithm1.cpp$(DependSuffix) -MM Algorithm1.cpp
+
+$(IntermediateDirectory)/Algorithm1.cpp$(PreprocessSuffix): Algorithm1.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Algorithm1.cpp$(PreprocessSuffix) Algorithm1.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

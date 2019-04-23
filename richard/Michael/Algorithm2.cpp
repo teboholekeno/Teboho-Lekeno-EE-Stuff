@@ -1,4 +1,6 @@
 #include "Algorithm2.h"
+#include <stdlib.h> 
+#include <time.h>
 
 Algorithm2::Algorithm2()
 {

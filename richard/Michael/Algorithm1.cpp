@@ -80,6 +80,10 @@ void Algorithm1::determineWinningMoves(Current_Playing_Board E)
                 Up_Winning (E, rows, columns); 
                 Right_Winning (E, rows, columns); 
                 Left_Winning (E, rows, columns); 
+                Diagonal_N_Down_Winning (E, rows, columns);
+                Diagonal_N_Up_Winning (E, rows, columns);
+                Diagonal_P_Down_Winning (E, rows, columns);
+                Diagonal_P_Up_Winning (E, rows, columns);
             }
         }
     }
@@ -97,7 +101,6 @@ void Algorithm1::Down_Winning (Current_Playing_Board E, int rows, int columns)
             if (counterDown >= 1 && E.Get_Marker(_rows, columns) == marker)
             {
                 encloseFound = true;                     // mark true if the encloser for the coin to be placed was found.
-                cout << "Winning found Down" << endl;
                 break;
             }
             else
@@ -111,7 +114,6 @@ void Algorithm1::Down_Winning (Current_Playing_Board E, int rows, int columns)
     { 
         auto obtainedMove = WinningMove {rows, columns, Get_Weight (rows, columns)};
         List_Of_Winning_Moves.push_back(obtainedMove); 
-        cout<< "Winning Down: " << rows << " " << columns << endl;
     }
 }
 
@@ -127,7 +129,6 @@ void Algorithm1::Up_Winning (Current_Playing_Board E, int rows, int columns)
             if (counterDown >= 1 && E.Get_Marker(_rows, columns) == marker)
             {
                 encloseFound = true;                     // mark true if the encloser for the coin to be placed was found.
-                cout << "Winning found Up" << endl;
                 break;
             }
             else
@@ -141,8 +142,6 @@ void Algorithm1::Up_Winning (Current_Playing_Board E, int rows, int columns)
     { 
         auto obtainedMove = WinningMove {rows, columns, Get_Weight (rows, columns)};
         List_Of_Winning_Moves.push_back(obtainedMove); 
-        
-        cout<< "Winning Up: " << rows << " " << columns << endl;
     }
 }
 
@@ -158,7 +157,6 @@ void Algorithm1::Left_Winning (Current_Playing_Board E, int rows, int columns)
             if (counterDown >= 1 && E.Get_Marker(rows, _columns) == marker)
             {
                 encloseFound = true;                     // mark true if the encloser for the coin to be placed was found.
-                cout << "Winning found Left" << endl;
                 break;
             }
             else
@@ -172,8 +170,6 @@ void Algorithm1::Left_Winning (Current_Playing_Board E, int rows, int columns)
     { 
         auto obtainedMove = WinningMove {rows, columns, Get_Weight (rows, columns)};
         List_Of_Winning_Moves.push_back(obtainedMove); 
-        
-        cout<< "Winning Left: " << rows << " " << columns << endl;
     }
 }
 
@@ -189,7 +185,6 @@ void Algorithm1::Right_Winning (Current_Playing_Board E, int rows, int columns)
             if (counterDown >= 1 && E.Get_Marker(rows, _columns) == marker)
             {
                 encloseFound = true;                     // mark true if the encloser for the coin to be placed was found.
-                cout << "Winning found Right" << endl;
                 break;
             }
             else
@@ -203,7 +198,119 @@ void Algorithm1::Right_Winning (Current_Playing_Board E, int rows, int columns)
     { 
         auto obtainedMove = WinningMove {rows, columns, Get_Weight (rows, columns)};
         List_Of_Winning_Moves.push_back(obtainedMove); 
-        cout<< "Winning Right: " << rows << " " << columns << endl;
+    }
+}
+
+
+void Algorithm1::Diagonal_N_Down_Winning (Current_Playing_Board object, int x, int y)
+{
+    int counterDown = 0; 
+    bool encloseFound = false;
+                
+    for (int rows = x+1, columns = y+1; rows < object.Get_Board_Size() && columns < object.Get_Board_Size(); rows++, columns++)
+    {
+        if (object.Get_Marker(rows, columns) == marker || object.Get_Marker(rows, columns) == '_' )
+        {
+            if (counterDown >= 1 && object.Get_Marker(rows, columns) == marker)
+            {
+                encloseFound = true;                     
+                break;
+            }
+            else
+                break;
+        }
+        else if (object.Get_Marker(rows, columns) != marker && object.Get_Marker(rows, columns) != '_' )
+        counterDown++;
+    }
+        
+    if (counterDown >= 1 && encloseFound == true) 
+    { 
+        auto obtainedMove = WinningMove {x, y, Get_Weight (x, y)};
+        List_Of_Winning_Moves.push_back(obtainedMove); 
+    }
+}
+
+void Algorithm1::Diagonal_N_Up_Winning (Current_Playing_Board object, int x, int y)
+{
+    int counterDown = 0; 
+    bool encloseFound = false;
+                
+    for (int rows = x-1, columns = y-1; rows >= 0 && columns >= 0; rows--, columns--)
+    {
+        if (object.Get_Marker(rows, columns) == marker || object.Get_Marker(rows, columns) == '_' )
+        {
+            if (counterDown >= 1 && object.Get_Marker(rows, columns) == marker)
+            {
+                encloseFound = true;                     
+                break;
+            }
+            else
+                break;
+        }
+        else if (object.Get_Marker(rows, columns) != marker && object.Get_Marker(rows, columns) != '_' )
+        counterDown++;
+    }
+        
+    if (counterDown >= 1 && encloseFound == true) 
+    { 
+        auto obtainedMove = WinningMove {x, y, Get_Weight (x, y)};
+        List_Of_Winning_Moves.push_back(obtainedMove); 
+    }
+}
+
+void Algorithm1::Diagonal_P_Down_Winning (Current_Playing_Board object, int x, int y)
+{
+    int counterDown = 0; 
+    bool encloseFound = false;
+                
+    for (int rows = x+1, columns = y-1; rows < object.Get_Board_Size() && columns >= 0; rows++, columns--)
+    {
+        if (object.Get_Marker(rows, columns) == marker || object.Get_Marker(rows, columns) == '_' )
+        {
+            if (counterDown >= 1 && object.Get_Marker(rows, columns) == marker)
+            {
+                encloseFound = true;                     
+                break;
+            }
+            else
+                break;
+        }
+        else if (object.Get_Marker(rows, columns) != marker && object.Get_Marker(rows, columns) != '_' )
+        counterDown++;
+    }
+        
+    if (counterDown >= 1 && encloseFound == true) 
+    { 
+        auto obtainedMove = WinningMove {x, y, Get_Weight (x, y)};
+        List_Of_Winning_Moves.push_back(obtainedMove); 
+    }
+}
+
+void Algorithm1::Diagonal_P_Up_Winning (Current_Playing_Board object, int x, int y)
+{
+    int counterDown = 0; 
+    bool encloseFound = false;
+                
+    for (int rows = x-1, columns = y+1; rows >= 0 && columns < object.Get_Board_Size(); rows--, columns++)
+    {
+        if (object.Get_Marker(rows, columns) == marker || object.Get_Marker(rows, columns) == '_' )
+        {
+            if (counterDown >= 1 && object.Get_Marker(rows, columns) == marker)
+            {
+                encloseFound = true;                     
+                break;
+            }
+            else
+                break;
+        }
+        else if (object.Get_Marker(rows, columns) != marker && object.Get_Marker(rows, columns) != '_' )
+        counterDown++;
+    }
+        
+    if (counterDown >= 1 && encloseFound == true) 
+    { 
+        auto obtainedMove = WinningMove {x, y, Get_Weight (x, y)};
+        List_Of_Winning_Moves.push_back(obtainedMove); 
     }
 }
 
@@ -228,7 +335,6 @@ WinningMove Algorithm1::Optimal_Move(Current_Playing_Board E)
             best_move = List_Of_Winning_Moves[counter];
     }
     
-    cout << "Best Move Selected: " << best_move.x << " " << best_move.y << endl;
     Format_List_Of_Winning_Moves();
     
     return best_move;

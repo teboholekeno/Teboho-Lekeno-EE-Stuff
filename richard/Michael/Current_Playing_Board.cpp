@@ -65,3 +65,17 @@ void Current_Playing_Board::Add_Algorithms_Markers (char marker1, char marker2)
     game_grid[size/2][(size/2)-1] = marker2;
 }
 
+bool Current_Playing_Board::Is_Board_Full()
+{
+    for (auto rows = 0; rows < size; rows++)
+    {
+        for (int columns = 0; columns < size; columns++)
+        {
+            if (Is_Cell_Empty(rows, columns))
+                return false;
+        }
+    }
+    
+    return true;           // Will only excecute if the whole board is empty
+}
+
