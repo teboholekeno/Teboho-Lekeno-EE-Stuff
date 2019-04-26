@@ -1,1 +1,0 @@
-./Debug/main.cpp.o ./Debug/truck.cpp.o ./Debug/PlantControl.cpp.o ./Debug/graphics.cpp.o ./Debug/Window_Size.cpp.o   

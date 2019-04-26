@@ -93,6 +93,8 @@
     </Configuration>
   </Settings>
   <VirtualDirectory Name="src">
+    <File Name="Storage.cpp"/>
+    <File Name="Storage.h"/>
     <File Name="Algorithm2.cpp"/>
     <File Name="Algorithm2.h"/>
     <File Name="Turn_Flanked_Pieces.cpp"/>

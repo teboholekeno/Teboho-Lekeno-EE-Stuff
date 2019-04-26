@@ -1,1 +1,0 @@
-./Debug/Window_Size.cpp.o ./Debug/Player.cpp.o ./Debug/Mushroom.cpp.o ./Debug/Movable_Objects.cpp.o ./Debug/main.cpp.o ./Debug/Graphics.cpp.o ./Debug/Game.cpp.o ./Debug/Collision.cpp.o ./Debug/Centipede.cpp.o ./Debug/Bullet.cpp.o   

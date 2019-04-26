@@ -61,7 +61,7 @@ AS       := C:/mingw64/bin/as.exe
 ##
 ## User defined environment variables
 ##
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Game_Board_Management.cpp$(ObjectSuffix) $(IntermediateDirectory)/Game_Control.cpp$(ObjectSuffix) $(IntermediateDirectory)/Algorithm2.cpp$(ObjectSuffix) $(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(ObjectSuffix) $(IntermediateDirectory)/Current_Playing_Board.cpp$(ObjectSuffix) $(IntermediateDirectory)/Algorithm1.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/Storage.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Game_Board_Management.cpp$(ObjectSuffix) $(IntermediateDirectory)/Game_Control.cpp$(ObjectSuffix) $(IntermediateDirectory)/Algorithm2.cpp$(ObjectSuffix) $(IntermediateDirectory)/Turn_Flanked_Pieces.cpp$(ObjectSuffix) $(IntermediateDirectory)/Current_Playing_Board.cpp$(ObjectSuffix) $(IntermediateDirectory)/Algorithm1.cpp$(ObjectSuffix) 
 
 
 
@@ -92,6 +92,14 @@ PreBuild:
 ##
 ## Objects
 ##
+$(IntermediateDirectory)/Storage.cpp$(ObjectSuffix): Storage.cpp $(IntermediateDirectory)/Storage.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Desktop/Teboho-Lekeno-EE-Stuff/richard/Michael/Storage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Storage.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Storage.cpp$(DependSuffix): Storage.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Storage.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Storage.cpp$(DependSuffix) -MM Storage.cpp
+
+$(IntermediateDirectory)/Storage.cpp$(PreprocessSuffix): Storage.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Storage.cpp$(PreprocessSuffix) Storage.cpp
+
 $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/teboho/Desktop/Teboho-Lekeno-EE-Stuff/richard/Michael/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp

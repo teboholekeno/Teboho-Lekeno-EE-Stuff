@@ -17,10 +17,12 @@ public:
 	Algorithm1(int);
     char Get_Marker() const {return marker;}
     WinningMove Optimal_Move(Current_Playing_Board);
+     string Get_Indentity() const {return identity;}
 	~Algorithm1();
 private:
 	int size;
     char marker = 'X';
+    string identity = "alg1";
     vector <WinningMove> List_Of_Winning_Moves;
 	int** playing_grid_clone;
     
@@ -38,7 +40,6 @@ private:
     void Diagonal_N_Up_Winning (Current_Playing_Board, int, int);
     void Diagonal_P_Down_Winning (Current_Playing_Board, int, int);
     void Diagonal_P_Up_Winning (Current_Playing_Board, int, int);
-    
 };
 
 

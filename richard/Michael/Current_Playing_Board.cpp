@@ -46,17 +46,6 @@ void Current_Playing_Board::Place_Move (int row, int column, char marker)
     game_grid [row][column] = marker;
 }
 
-void Current_Playing_Board::display() const
-{
-	for (auto rows = 0; rows < size; rows++)
-    {
-        for (auto columns = 0; columns < size; columns++)
-        {
-			cout << game_grid[rows][columns] << " ";
-        } cout << endl;
-    }
-}
-
 void Current_Playing_Board::Add_Algorithms_Markers (char marker1, char marker2)
 {
     game_grid[size/2][size/2] = marker1;

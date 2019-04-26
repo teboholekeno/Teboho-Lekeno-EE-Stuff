@@ -12,7 +12,6 @@ public:
     bool Is_Cell_Empty(int, int) const;
     void Place_Move (int, int, char);
     char Get_Marker(int x, int y) const {return game_grid[x][y];}
-    void display() const;
     int Get_Board_Size() const {return size;}
     bool Is_Board_Full();
     ~Current_Playing_Board();

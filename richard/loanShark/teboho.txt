@@ -1,1 +1,0 @@
-./Debug/main.cpp.o ./Debug/graphs.cpp.o ./Debug/security.cpp.o ./Debug/Window_Size.cpp.o ./Debug/addCreditor.cpp.o ./Debug/exception.cpp.o ./Debug/date.cpp.o ./Debug/accountant.cpp.o ./Debug/processor.cpp.o   

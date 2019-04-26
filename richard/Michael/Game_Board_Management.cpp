@@ -10,12 +10,14 @@ void Game_Board_Management::Collect_Boards_Sizes()
 {
     std::ifstream infile ("input.txt");
     int Board_Size;
+    char comma;
+
     
     if (infile.good())
     {
         while (!infile.eof())
         {
-            infile >> Board_Size;
+            infile >> Board_Size >> comma;
             
             if (Board_Size >= 4 && Board_Size <= 16 && Board_Size%2 == 0)
                 Boards_Storage.push_back(Board_Size);

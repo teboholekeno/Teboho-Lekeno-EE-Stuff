@@ -5,6 +5,7 @@
 #include "Turn_Flanked_Pieces.h"
 #include "Algorithm1.h"
 #include "Algorithm2.h"
+#include "Storage.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ public:
     ~Game_Control();
     void run();
 private:
+    Storage storage;
     Game_Board_Management gameBoardManagement;
     Current_Playing_Board currentPlayingBoard;
     Turn_Flanked_Pieces turnFlankedPieces;
