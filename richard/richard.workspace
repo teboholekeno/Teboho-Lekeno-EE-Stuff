@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="richard" Database="" Version="10.0.0">
-  <Project Name="teboho" Path="loanShark/loanShark.project" Active="No"/>
-  <Project Name="morembola" Path="morembola/morembola.project" Active="No"/>
-  <Project Name="shenge" Path="shenge/shenge.project" Active="No"/>
-  <Project Name="sdddfd" Path="sdddfd/sdddfd.project" Active="No"/>
   <Project Name="Michael" Path="Michael/Michael.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
