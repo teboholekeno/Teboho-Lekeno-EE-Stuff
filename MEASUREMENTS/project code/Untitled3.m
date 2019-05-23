@@ -23,12 +23,13 @@ C = 2.348*10^9;
 
 %DYNAMIC SYSTEM TRANSFER FUNCTION
 s = tf('s');
+H_l = 9.7529*10^9/(s^2 + 27.23897*s + 9.7529*10^9);
 H_filter = A/(s^3 + B*s^2 + C*s + A);
 H_sensor = (w_o^2)/(s^2 + 2*zeta*w_o*s+w_o^2);
-H_cascade = H_sensor*H_filter;
+H_cascade = H_l*H_filter;
 sensor_ss = ss(H_cascade)
 
 %LINEAR SYSTEM ANALYSIS
-linearSystemAnalyzer('step', H_cascade, 0:0.1:5);
-bode (H_cascade);
+linearSystemAnalyzer('step', H_filter, 0:0.1:5);
+bode (H_filter)
 
