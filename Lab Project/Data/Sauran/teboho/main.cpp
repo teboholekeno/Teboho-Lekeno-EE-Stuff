@@ -22,7 +22,8 @@ int main()
     int counter(0);
 
     ifstream infile ("input.txt");
-    ofstream outfile ("output.txt");
+    ofstream outfile ("V-I characteristics.txt");
+    ofstream outfile2 ("Average Power per hour.txt");
 
     while (!infile.eof())
     {
@@ -59,13 +60,27 @@ int main()
                             break;
                     }
                 }
-            }
+
+                outfile << V << " " << I << endl;
+            } outfile << endl << endl << endl;
 
             power+= iter_p;
+
+            outfile2 << counter << " " << iter_p << endl;
         }
+        else
+        {
+            outfile2 << counter << " " << 0 << endl;
+        }
+
+        counter++;
     }
 
     cout << power << endl;
+
+    infile.close();
+    outfile.close();
+    outfile2.close();
 
     return 0;
 }
