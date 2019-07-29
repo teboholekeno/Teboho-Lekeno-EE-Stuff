@@ -4,10 +4,7 @@
 
 using namespace std;
 
-double valueE(double d)
-{
-    return log(d);
-}
+double valueE(double d){return log(d);}
 
 int main()
 {
@@ -31,41 +28,40 @@ int main()
     {
         infile >> V_T >> Voc >> Isc;
 
+        double iter_p(0);
+
         if (Isc > 0)
         {
-            outfile << V_T << " " << Voc << " " << Isc << endl;
 
             for (double I = 0; I < Isc; I = I+0.00001)
             {
 
                 V = Voc+V_T*valueE(1-(I/Isc))-Rs*I;
 
-                if (V>=12 && V<=12.2)
+                if (V>=11.9 && V<=12.2)
                 {
-                    power+= V*I;
-                    counter++;
+                    if (V*I > iter_p)
+                        iter_p = V*I;
                 }
-
-                outfile << I << " " << V << endl;
 
                 if (I + 0.00001 >= Isc)
                 {
                     while (true)
                     {
                         V -= 0.1;
-                        if (V>=12 && V<=12.2)
+                        if (V>=11.9 && V<=12.2)
                         {
-                            power+= V*Isc;
-                            counter++;
+                            if (V*Isc > iter_p)
+                                iter_p = V*I;
                         }
 
-                        outfile << Isc << " " << V << endl;
                         if (V <= 0)
                             break;
                     }
                 }
             }
-            outfile << endl << endl << endl;
+
+            power+= iter_p;
         }
     }
 
