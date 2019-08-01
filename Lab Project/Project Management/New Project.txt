@@ -1,0 +1,59 @@
+Off-grid Electrification Solution
+
+Prototype implementation
+
+prototype material delivery
+
+demonstrating a working prototype 
+
+MPPT charge controller implementation
+
+Buck-converter
+
+Inductor implementation
+
+MOSFET driver implementation
+
+Buck-converter assembling and testing
+
+incremental conductance algorithm
+
+Algorithm implementation
+
+Algorithm testing
+
+demonstrating improved system with MPPT charge controller.
+
+DC-AC inverter implementation
+
+Astable multivibrator
+
+Implementation
+
+Testing for 50Hz square wave
+
+Third order low passive filter
+
+Assembling and testing for since wave
+
+High frequency transformer 
+
+Implimentation
+
+Testing
+
+Demonstrating an improved system with additional AC loads. 
+
+Load protection implementation
+
+Over-voltage protection on battery
+
+Under-voltage protection on battery
+
+Short-circuit protection
+
+Over-current protection 
+
+Demonstrating an improved system with functional load protection mechanism
+
+Packaging
