@@ -78,7 +78,7 @@ void battery_level_display(float vin)
 void inverter_overcurrent_protection()
 {
   //CHECKING FOR OVERCURRENT (SHORT-CIRCUIT/OVERLOAD) ON THE INVERTER CIRCUIT
-  if (digitalRead(6) == HIGH)        // the statement execute if the overload occured
+  if (digitalRead(10) == HIGH)        // the statement execute if the overload occured
   {
      if (delayRunning)
       {
