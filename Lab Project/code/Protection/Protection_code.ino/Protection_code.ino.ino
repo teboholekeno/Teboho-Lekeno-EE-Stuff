@@ -88,6 +88,25 @@ void inverter_overcurrent_protection()
     digitalWrite(9,LOW);            // the switch will be normally closed when there is no overload detected.
 }
 
+void battery_level_display(float vin)
+{
+  //##############BATTERY LEVEL DISPLAY###########################
+  if (((vin-cutoff)/(overvoltage-cutoff))*100 <= 0)
+     battery_life_display (0);
+  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 1 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 20)
+     battery_life_display (1);
+  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 20 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 40)
+     battery_life_display (2);
+  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 40 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 60)
+     battery_life_display (3);
+   else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 60 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 80)
+     battery_life_display (4);
+   else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 80 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 100)
+     battery_life_display (5);
+  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 100)
+     battery_life_display (6);
+}
+
 void loop(){
 //#################### Overvoltage and Undervoltage protection ####################################
 
@@ -96,48 +115,17 @@ void loop(){
   vin = vout / ((wiper/potentiometer));
   
   if (vin<0.10)
-  {
     vin=0.0;
-  }
   
   if(vin<=cutoff)
-  {
      under_and_undervoltage_switch (true, false);
-  }
   
   if(vin>=nominal && vin<=overvoltage && vin>cutoff)
-  {
      under_and_undervoltage_switch (false, false);
-  }
   
   if(vin>=overvoltage)
-  {
      under_and_undervoltage_switch (false, true);
-  }
-  
-  //##############BATTERY LEVEL DISPLAY###########################
-  if (((vin-cutoff)/(overvoltage-cutoff))*100 <= 0)
-  {
-     battery_life_display (0);
-  }
-  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 1 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 20)
-  {
-     battery_life_display (1);
-  }
-  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 20 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 40)
-  {
-     battery_life_display (2);
-  }
-  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 40 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 60)
-  {
-     battery_life_display (3);
-  }
-   else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 60 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 80)
-     battery_life_display (4);
-   else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 80 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 100)
-     battery_life_display (5);
-  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 100)
-     battery_life_display (6);
 
+  battery_level_display(vin);
   inverter_overcurrent_protection();
 }
