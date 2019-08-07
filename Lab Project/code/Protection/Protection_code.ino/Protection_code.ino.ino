@@ -27,38 +27,52 @@ void setup()
   pinMode(0,OUTPUT);
 }
 
-void battery_life_display (int level)
-{
-   for (int control = 0; control < 6; control++)
-   {
-     if (control < level)
-     {
-        digitalWrite(5-control,HIGH);
-     }
-     else
-     {
-       digitalWrite(5-control,LOW);
-     }
-   }
+void battery_life_display (int);
+void under_and_undervoltage_switch (bool, bool);
+void inverter_overcurrent_protection();
+void battery_level_display(float);
+void battery_life_control (float);
+
+void loop(){
+
+  value = analogRead(analogInputVoltage);
+  vout = (value * 5.0) / 1024;
+  vin = vout / ((wiper/potentiometer));
+    
+  battery_life_control(vin);
+  battery_level_display(vin);
+  inverter_overcurrent_protection();
 }
 
-void under_and_undervoltage_switch (bool undervoltage, bool overvoltage)
+void battery_life_control (float vin)
 {
-  if (undervoltage)
-  {
-     digitalWrite(8,HIGH);
-     digitalWrite(7,LOW);
-  }
-  else if (overvoltage)
-  {
-     digitalWrite(7,HIGH);
-     digitalWrite(8,LOW);
-  }
-  else if (!undervoltage && !overvoltage)
-  {
-     digitalWrite(8,LOW);
-     digitalWrite(7,LOW);
-  }
+    if(vin<=cutoff)
+     under_and_undervoltage_switch (true, false);
+  
+  if(vin>=nominal && vin<=overvoltage && vin>cutoff)
+     under_and_undervoltage_switch (false, false);
+  
+  if(vin>=overvoltage)
+     under_and_undervoltage_switch (false, true);
+}
+
+void battery_level_display(float vin)
+{
+  //##############BATTERY LEVEL DISPLAY###########################
+  if (((vin-cutoff)/(overvoltage-cutoff))*100 <= 0)
+     battery_life_display (0);
+  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 1 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 20)
+     battery_life_display (1);
+  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 20 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 40)
+     battery_life_display (2);
+  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 40 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 60)
+     battery_life_display (3);
+   else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 60 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 80)
+     battery_life_display (4);
+   else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 80 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 100)
+     battery_life_display (5);
+  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 100)
+     battery_life_display (6);
 }
 
 void inverter_overcurrent_protection()
@@ -88,44 +102,37 @@ void inverter_overcurrent_protection()
     digitalWrite(9,LOW);            // the switch will be normally closed when there is no overload detected.
 }
 
-void battery_level_display(float vin)
+void under_and_undervoltage_switch (bool undervoltage, bool overvoltage)
 {
-  //##############BATTERY LEVEL DISPLAY###########################
-  if (((vin-cutoff)/(overvoltage-cutoff))*100 <= 0)
-     battery_life_display (0);
-  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 1 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 20)
-     battery_life_display (1);
-  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 20 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 40)
-     battery_life_display (2);
-  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 40 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 60)
-     battery_life_display (3);
-   else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 60 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 80)
-     battery_life_display (4);
-   else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 80 && ((vin-cutoff)/(overvoltage-cutoff))*100 < 100)
-     battery_life_display (5);
-  else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 100)
-     battery_life_display (6);
+  if (undervoltage)
+  {
+     digitalWrite(8,HIGH);
+     digitalWrite(7,LOW);
+  }
+  else if (overvoltage)
+  {
+     digitalWrite(7,HIGH);
+     digitalWrite(8,LOW);
+  }
+  else if (!undervoltage && !overvoltage)
+  {
+     digitalWrite(8,LOW);
+     digitalWrite(7,LOW);
+  }
 }
 
-void loop(){
-//#################### Overvoltage and Undervoltage protection ####################################
-
-  value = analogRead(analogInputVoltage);
-  vout = (value * 5.0) / 1024;
-  vin = vout / ((wiper/potentiometer));
-  
-  if (vin<0.10)
-    vin=0.0;
-  
-  if(vin<=cutoff)
-     under_and_undervoltage_switch (true, false);
-  
-  if(vin>=nominal && vin<=overvoltage && vin>cutoff)
-     under_and_undervoltage_switch (false, false);
-  
-  if(vin>=overvoltage)
-     under_and_undervoltage_switch (false, true);
-
-  battery_level_display(vin);
-  inverter_overcurrent_protection();
+void battery_life_display (int level)
+{
+   for (int control = 0; control < 6; control++)
+   {
+     if (control < level)
+     {
+        digitalWrite(5-control,HIGH);
+     }
+     else
+     {
+       digitalWrite(5-control,LOW);
+     }
+   }
 }
+
