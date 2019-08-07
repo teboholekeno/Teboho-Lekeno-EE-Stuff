@@ -61,6 +61,33 @@ void under_and_undervoltage_switch (bool undervoltage, bool overvoltage)
   }
 }
 
+void inverter_overcurrent_protection()
+{
+  //CHECKING FOR OVERCURRENT (SHORT-CIRCUIT/OVERLOAD) ON THE INVERTER CIRCUIT
+  if (digitalRead(6) == HIGH)        // the statement execute if the overload occured
+  {
+     if (delayRunning)
+      {
+        if (delayRunning && (millis()-delayStart >= 2000))
+        {
+          // toggling the switch to reset the inverter
+          digitalWrite(9,HIGH);
+          delay(300);
+          digitalWrite(9,LOW);
+    
+          delayRunning = false;    
+        }
+      }
+     else 
+     {
+       delayStart = millis();
+       delayRunning = true; 
+     }
+  }
+  else 
+    digitalWrite(9,LOW);            // the switch will be normally closed when there is no overload detected.
+}
+
 void loop(){
 //#################### Overvoltage and Undervoltage protection ####################################
 
@@ -112,29 +139,5 @@ void loop(){
   else if (((vin-cutoff)/(overvoltage-cutoff))*100 >= 100)
      battery_life_display (6);
 
-//CHECKING FOR OVERCURRENT (SHORT-CIRCUIT/OVERLOAD) ON THE INVERTER CIRCUIT
-  if (digitalRead(6) == HIGH)        // the statement execute if the overload occured
-  {
-     if (delayRunning)
-      {
-        if (delayRunning && (millis()-delayStart >= 10000))
-        {
-          // toggling the switch to reset the inverter
-          digitalWrite(9,HIGH);
-          delay(300);
-          digitalWrite(9,LOW);
-    
-          delayRunning = false;    
-        }
-      }
-     else 
-     {
-       delayStart = millis();
-       delayRunning = true; 
-     }
-  }
-  else 
-  {
-    digitalWrite(9,LOW);            // the switch will be normally closed when there is no overload detected.
-  }
+  inverter_overcurrent_protection();
 }
