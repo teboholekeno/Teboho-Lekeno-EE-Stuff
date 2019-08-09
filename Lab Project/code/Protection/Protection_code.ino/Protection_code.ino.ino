@@ -4,7 +4,7 @@ float overvoltage = 14.00;       //Overvoltage
 int analogInputVoltage = A0;
 float vout = 0.0;
 float vin = 0.0;
-float wiper = 3500;
+float wiper = 100000;
 float potentiometer = 10000;
 int value = 0;
 unsigned long delayStart = 0;    //the time the delay starts.
@@ -37,7 +37,7 @@ void loop(){
 
   value = analogRead(analogInputVoltage);
   vout = (value * 5.0) / 1024;
-  vin = vout / ((wiper/potentiometer));
+  vin = vout / ((potentiometer/(potentiometer+wiper)));
     
   battery_life_control(vin);
   battery_level_display(vin);
@@ -135,4 +135,3 @@ void battery_life_display (int level)
      }
    }
 }
-
