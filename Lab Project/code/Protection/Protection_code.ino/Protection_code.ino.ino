@@ -12,7 +12,7 @@ unsigned long battery_delay_start = 0;
 bool inverter_delay_running = false;                          //the value is true if the delay is still on.
 bool battery_delay_running = false; 
 float current_sensor_sensitivity = 0.070375;  //measured in V/A
-float maximum_current_discharge = 2;          //measured in A.
+float maximum_current_discharge = 0.38;          //measured in A.
 
 void setup()
 {
