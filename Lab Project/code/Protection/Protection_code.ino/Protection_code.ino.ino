@@ -44,7 +44,7 @@ void loop(){
   int value = analogRead(analogInputVoltage);
   int digitalBatteryCurrent = analogRead(analogBatteryCurrent);
   
-  vout = (value * 5.0) / 1024;
+  vout = (value * 5.0) / 1023;
   vin = vout / ((potentiometer/(potentiometer+wiper)));
     
   battery_life_control(vin);
@@ -144,8 +144,6 @@ void battery_life_display (int level)
      }
    }
 }
-<<<<<<< HEAD
-=======
 
 void battery_overcurrent_protection(int digitalBatteryCurrent)
 {
@@ -158,9 +156,9 @@ void battery_overcurrent_protection(int digitalBatteryCurrent)
         if (battery_delay_running && (millis()-battery_delay_start >= 2000))
         {
           // toggling the switch to reset the whole system
-          digitalWrite(12,HIGH);
+          digitalWrite(8,HIGH);
           delay(300);
-          digitalWrite(12,LOW);
+          digitalWrite(8,LOW);
     
           battery_delay_running = false;    
         }
@@ -170,10 +168,6 @@ void battery_overcurrent_protection(int digitalBatteryCurrent)
        battery_delay_start = millis();
        battery_delay_running = true; 
      }
-  }
-  else
-    digitalWrite(12,LOW);
-  }
+   }
+  } 
 }
-
->>>>>>> 50e3be1f2260b856e7537e2fe02f96a173c9fd7a
