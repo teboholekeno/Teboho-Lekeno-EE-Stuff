@@ -43,6 +43,8 @@ void setup()
 
 void loop(){
 
+  pwmWrite(Speaker, 128);
+  
   int value = analogRead(analogInputVoltage);
   vout = (value * 5.0) / 1023;
   vin = vout / ((potentiometer/(potentiometer+wiper)));
