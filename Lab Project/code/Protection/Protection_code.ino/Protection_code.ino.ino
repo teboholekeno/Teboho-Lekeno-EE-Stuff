@@ -1,22 +1,22 @@
-float cutoff = 11.80;                              //Cutoff voltage
-float nominal = 12.70;                             //Nomial Voltage
-float overvoltage = 13.9;                          //Overvoltage
-int analogInputVoltage = A0;
-int analogBatteryCurrent = A2;  
+float cutoff = 10.5;                       //Cutoff voltage
+float nominal = 12.70;                      //Nomial Voltage
+float overvoltage = 14;                     //Overvoltage
+int analogInputVoltage = A0;  
 float vout = 0.0;
 float vin = 0.0;
 float wiper = 100000;
 float potentiometer = 10000;
-unsigned long inverter_delay_start = 0;                       //the time the delay starts.
+unsigned long inverter_delay_start = 0;     //the time the delay starts.
 unsigned long battery_delay_start = 0;  
-bool inverter_delay_running = false;                          //the value is true if the delay is still on.
+bool inverter_delay_running = false;        //the value is true if the delay is still on.
 bool battery_delay_running = false; 
-float current_sensor_sensitivity = 0.070375;  //measured in V/A
-float maximum_current_discharge = 0.38;          //measured in A.
+unsigned long inverter_trip_time = 2;       // (measured in seconds) delay for inverter overcurrent protection during off-mode.
+unsigned long battery_trip_time =  2;       // (measured in seconds) the time set to switch the system off before the overcurrent can be detected again. 
 
 void setup()
 {
   pinMode(analogInputVoltage,INPUT);
+  pinMode(16,INPUT);
   pinMode(8,OUTPUT);             //used to separate the battery from load when there is undervoltage.
   pinMode(7,OUTPUT);             //used to separate the battery from panel when the battery is fully chargered.
   pinMode(6,INPUT);              //used to monitor the overcurrent protection on the inverter.
@@ -32,24 +32,15 @@ void setup()
   pinMode(0,OUTPUT);
 }
 
-void battery_life_display (int);
-void under_and_undervoltage_switch (bool, bool);
-void inverter_overcurrent_protection();
-void battery_level_display(float);
-void battery_life_control (float);
-void battery_overcurrent_protection(int);
-
 void loop(){
 
   int value = analogRead(analogInputVoltage);
-  int digitalBatteryCurrent = analogRead(analogBatteryCurrent);
-  
   vout = (value * 5.0) / 1023;
   vin = vout / ((potentiometer/(potentiometer+wiper)));
     
   battery_life_control(vin);
   battery_level_display(vin);
-  battery_overcurrent_protection(digitalBatteryCurrent);
+  battery_overcurrent_protection();
   inverter_overcurrent_protection();
 }
 
@@ -87,28 +78,18 @@ void battery_level_display(float vin)
 void inverter_overcurrent_protection()
 {
   //CHECKING FOR OVERCURRENT (SHORT-CIRCUIT/OVERLOAD) ON THE INVERTER CIRCUIT
-  if (digitalRead(10) == HIGH)        // the statement execute if the overload occured
+  if (digitalRead(10) == LOW)        // the statement execute if the overload occured
   {
-     if (inverter_delay_running)
-      {
-        if (inverter_delay_running && (millis()-inverter_delay_start >= 2000))
-        {
-          // toggling the switch to reset the inverter
-          digitalWrite(9,HIGH);
-          delay(300);
-          digitalWrite(9,LOW);
-    
-          inverter_delay_running = false;    
-        }
-      }
-     else 
-     {
-       inverter_delay_start = millis();
-       inverter_delay_running = true; 
-     }
+      digitalWrite(9,HIGH);
+      inverter_delay_start = millis();
+      inverter_delay_running = true; 
   }
-  else 
-    digitalWrite(9,LOW);            // the switch will be normally closed when there is no overload detected.
+  
+  if (inverter_delay_running && (millis()-inverter_delay_start >= 1000*inverter_trip_time))
+  {
+     digitalWrite(9,LOW);
+     inverter_delay_running = false;    
+  }
 }
 
 void under_and_undervoltage_switch (bool undervoltage, bool overvoltage)
@@ -121,12 +102,28 @@ void under_and_undervoltage_switch (bool undervoltage, bool overvoltage)
   else if (overvoltage)
   {
      digitalWrite(7,HIGH);
-     digitalWrite(8,LOW);
+     if (!battery_delay_running) digitalWrite(8,LOW);
   }
   else if (!undervoltage && !overvoltage)
   {
-     digitalWrite(8,LOW);
+     if (!battery_delay_running) digitalWrite(8,LOW);
      digitalWrite(7,LOW);
+  }
+}
+
+void battery_overcurrent_protection()
+{
+  if (digitalRead(16) == LOW)        // the statement execute if the overload occured
+  {
+      digitalWrite(8,HIGH);
+      battery_delay_start = millis();
+      battery_delay_running= true; 
+  }
+  
+  if (battery_delay_running && (millis()-battery_delay_start >= 1000*battery_trip_time))
+  {
+     digitalWrite(8,LOW);
+     battery_delay_running = false;    
   }
 }
 
@@ -143,31 +140,4 @@ void battery_life_display (int level)
        digitalWrite(5-control,LOW);
      }
    }
-}
-
-void battery_overcurrent_protection(int digitalBatteryCurrent)
-{
-  if (digitalBatteryCurrent >= 512)  //this means the battery is use.
-  {
-    if ((static_cast<float>(digitalBatteryCurrent) - 512)/((current_sensor_sensitivity/5)*1023) >= maximum_current_discharge)  //there is overcurrent being drawn from the battery
-    {
-      if (battery_delay_running)
-      {
-        if (battery_delay_running && (millis()-battery_delay_start >= 2000))
-        {
-          // toggling the switch to reset the whole system
-          digitalWrite(8,HIGH);
-          delay(300);
-          digitalWrite(8,LOW);
-    
-          battery_delay_running = false;    
-        }
-      }
-     else 
-     {
-       battery_delay_start = millis();
-       battery_delay_running = true; 
-     }
-   }
-  } 
 }
