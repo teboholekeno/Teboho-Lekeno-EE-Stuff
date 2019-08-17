@@ -1,6 +1,8 @@
-float cutoff = 10.5;                       //Cutoff voltage
-float nominal = 12.70;                      //Nomial Voltage
-float overvoltage = 14;                     //Overvoltage
+#include <PWM.h>
+
+float cutoff = 9.6;                           //Cutoff voltage
+float nominal = 12.70;                        //Nomial Voltage
+float overvoltage = 13.9;                     //Overvoltage
 int analogInputVoltage = A0;  
 float vout = 0.0;
 float vin = 0.0;
@@ -12,6 +14,8 @@ bool inverter_delay_running = false;        //the value is true if the delay is 
 bool battery_delay_running = false; 
 unsigned long inverter_trip_time = 2;       // (measured in seconds) delay for inverter overcurrent protection during off-mode.
 unsigned long battery_trip_time =  2;       // (measured in seconds) the time set to switch the system off before the overcurrent can be detected again. 
+int32_t frequency = 10000;                   //frequency in Hertz
+int Speaker = 6;                            // the PWM Pin to control the sound. 
 
 void setup()
 {
@@ -19,7 +23,6 @@ void setup()
   pinMode(16,INPUT);
   pinMode(8,OUTPUT);             //used to separate the battery from load when there is undervoltage.
   pinMode(7,OUTPUT);             //used to separate the battery from panel when the battery is fully chargered.
-  pinMode(6,INPUT);              //used to monitor the overcurrent protection on the inverter.
   pinMode(9, OUTPUT);            //used for controlling the switch that reset the inverter during overload protection.
   pinMode(12, OUTPUT);           //used for battery overcurrent indication
 
@@ -30,6 +33,12 @@ void setup()
   pinMode(2,OUTPUT);
   pinMode(1,OUTPUT);
   pinMode(0,OUTPUT);
+  
+  //setup for Sound Frequency and PWM control
+  //initialize all timers except for 0, to save time keeping functions.
+  InitTimersSafe();              
+  
+  bool success = SetPinFrequencySafe(Speaker, frequency);
 }
 
 void loop(){
@@ -42,6 +51,8 @@ void loop(){
   battery_level_display(vin);
   battery_overcurrent_protection();
   inverter_overcurrent_protection();
+  
+  
 }
 
 void battery_life_control (float vin)
