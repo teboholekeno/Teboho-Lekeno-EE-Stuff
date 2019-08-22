@@ -1,4 +1,4 @@
-//#include <PWM.h>
+#include <PWM.h>
 
 float cutoff = 9.6;                           //Cutoff voltage
 float nominal = 12.70;                        //Nomial Voltage
@@ -20,14 +20,12 @@ int Speaker = 6;                            // the PWM Pin to control the sound.
 void setup()
 {
   pinMode(analogInputVoltage,INPUT);
-  pinMode(16,INPUT);                        // charging overcurrent
-  pinMode(8,OUTPUT);                        //used to separate the battery from load when there is undervoltage.
-  pinMode(7,OUTPUT);                        //used to separate the battery from panel when the battery is fully chargered.
-  pinMode(9, OUTPUT);                       //used for controlling the switch that reset the inverter during overload protection.
-  pinMode(6,OUTPUT);                        //speaker
-  pinMode(17,INPUT);                        //reading inverter overload
-  pinMode(15,INPUT);                        //battery overcurrent drawn
- 
+  pinMode(16,INPUT);
+  pinMode(8,OUTPUT);             //used to separate the battery from load when there is undervoltage.
+  pinMode(7,OUTPUT);             //used to separate the battery from panel when the battery is fully chargered.
+  pinMode(9, OUTPUT);            //used for controlling the switch that reset the inverter during overload protection.
+  pinMode(12, OUTPUT);           //used for battery overcurrent indication
+
   //this pins are used to control the led's that shows the life of the battery
   pinMode(5,OUTPUT);
   pinMode(4,OUTPUT);
@@ -38,12 +36,14 @@ void setup()
   
   //setup for Sound Frequency and PWM control
   //initialize all timers except for 0, to save time keeping functions.
-  //InitTimersSafe();              
+  InitTimersSafe();              
   
-//  bool success = SetPinFrequencySafe(Speaker, frequency);
+  bool success = SetPinFrequencySafe(Speaker, frequency);
 }
 
 void loop(){
+
+  pwmWrite(Speaker, 128);
   
   int value = analogRead(analogInputVoltage);
   vout = (value * 5.0) / 1023;
@@ -91,7 +91,7 @@ void battery_level_display(float vin)
 void inverter_overcurrent_protection()
 {
   //CHECKING FOR OVERCURRENT (SHORT-CIRCUIT/OVERLOAD) ON THE INVERTER CIRCUIT
-  if (digitalRead(17) == LOW)        // the statement execute if the overload occured
+  if (digitalRead(10) == LOW)        // the statement execute if the overload occured
   {
       digitalWrite(9,HIGH);
       inverter_delay_start = millis();
@@ -126,7 +126,7 @@ void under_and_undervoltage_switch (bool undervoltage, bool overvoltage)
 
 void battery_overcurrent_protection()
 {
-  if (digitalRead(15) == LOW)        // the statement execute if the overload occured
+  if (digitalRead(16) == LOW)        // the statement execute if the overload occured
   {
       digitalWrite(8,HIGH);
       battery_delay_start = millis();
@@ -146,11 +146,11 @@ void battery_life_display (int level)
    {
      if (control < level)
      {
-        digitalWrite(control,HIGH);
+        digitalWrite(5-control,HIGH);
      }
      else
      {
-       digitalWrite(control,LOW);
+       digitalWrite(5-control,LOW);
      }
    }
 }
