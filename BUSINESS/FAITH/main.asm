@@ -15,6 +15,13 @@
 	LDI ZL, LOW (DISPLAY_ARRAY<<1)
 	LDI ZH, HIGH (DISPLAY_ARRAY<<1)
 
+	;===================================== SETTING UP THE TIMER0 =========================================
+	LDI SLAVE_CELL,  0B00000101
+    OUT TCCR0B, SLAVE_CELL            ;PRESCALING THE CLOCK FREQUENCY WITH 1024... PERIOD = 64*10^(-6) s             
+    LDI SLAVE_CELL, 0B00000001
+    STS TIMSK0, SLAVE_CELL            ;ENABLING THE TIME FLOW INTERUPT
+    SEI                               ;ENABLING THE GLOBAL INTERUPT
+
 	RJMP MAIN
 	
 MAIN:
