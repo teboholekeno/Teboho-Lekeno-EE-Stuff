@@ -1,0 +1,31 @@
+;
+; Faith Code.asm
+;
+; Created: 16-Sep-19 4:54:41 PM
+; Author : teboho
+;
+
+.INCLUDE "M328PDEF.INC"
+	.ORG 0x00
+
+	//DECLARING PORTS AND PINS 
+	SER R16                                          ; SETTING PORTD AS THE OUTPORT FOR THE 7SEGMENT DISPLAY
+	OUT DDRD, R16
+
+	LDI ZL, LOW (DISPLAY_ARRAY<<1)
+	LDI ZH, HIGH (DISPLAY_ARRAY<<1)
+
+	RJMP MAIN
+	
+MAIN:
+	LDI R16, 0B01010011
+	OUT PORTD, R16
+	RJMP MAIN
+
+                                         
+//SEVEN SEGMENT DISPLAY LOOK-UP TABLE
+	.ORG $500
+DISPLAY_ARRAY: .DB 190, 48, 173, 185, 51, 155, 159, 176, 191, 179
+
+
+
