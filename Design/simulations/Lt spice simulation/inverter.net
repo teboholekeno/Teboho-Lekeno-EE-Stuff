@@ -1,0 +1,52 @@
+* C:\Users\lekenot\Desktop\Teboho-Lekeno-EE-Stuff\Design\simulations\Lt spice simulation\inverter.asc
+V1 sawtooth 0 PULSE(-2 2 0 0.000025 0.000025 0 0.0000500005)
+V3 0 -vcc 12
+V4 vcc 0 12
+E1 drive1 0 A_ 0 35
+E2 drive2 0 B_ 0 35
+V6 sine_g 0 SINE(0 2 50 0 0 180)
+XU1 0 N001 vcc -vcc sine_ LM741/NS
+R3 sine_ N001 100
+R4 N001 sine 100
+XU2 sawtooth sine vcc 0 A_ LM741/NS
+XU3 sine sawtooth vcc 0 A LM741/NS
+M5 N002 drive2 ad ad R6020PNJ
+M6 ad B 0 0 R6020PNJ
+M7 N002 drive1 out1 out1 R6020PNJ
+M8 out1 A 0 0 R6020PNJ
+V5 N002 0 400
+XU4 sawtooth sine_ vcc 0 B_ LM741/NS
+XU5 sine_ sawtooth vcc 0 B LM741/NS
+E3 stepdown 0 ad au 4.5016m
+L1 out1 au 28.64m Ipk=4
+C1 au ad 884.2n
+R1 au ad 600
+XU6 N006 N003 vcc -vcc error LM741/NS
+R2 error N003 200
+R5 N003 stepdown 100
+R6 N006 sine_g 100
+R7 N006 0 200
+XU7 0 N004 vcc -vcc N005 LM741/NS
+R8 N005 N004 100
+R9 N004 error 100
+XU8 0 N007 vcc -vcc N008 LM741/NS
+R10 N008 N007 100
+R11 N007 error 100
+C2 N007 N008 100µ
+R14 summer N005 100
+R15 summer N008 100
+XU10 0 summer vcc -vcc sine LM741/NS
+R17 sine summer 100
+XU9 0 N009 vcc -vcc N010 LM741/NS
+R12 N010 N009 100k
+R13 P001 error 100k
+R16 summer N010 100
+C3 N010 N009 100µ
+C4 N009 P001 10µ
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\lekenot\Documents\LTspiceXVII\lib\cmp\standard.mos
+.tran 0 5 0 0.002
+.include C:\Users\lekenot\Desktop\LM741.MOD
+.backanno
+.end
